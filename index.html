@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo">
+            <img src="logo.png" alt="Petal Logo" class="logoimg" width="40" height="40" />
+            <span>Petal Docs</span>
+        </div>
+        <div class="nav-section">
+            <div class="nav-title">Petal Commands</div>
+            <a href="#Petal-Commands" class="nav-link">Petal Commands</a>
+            <a href="#Normal" class="nav-link">Normal Commands</a>
+            <a href="#Admin" class="nav-link">PetalAdmin Commands</a>
+            <a href="#cInfo" class="nav-link">Commands Info</a>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-title">core.js Documentation</div>
+            <a href="#corejs" class="nav-link">Understanding core.js</a>
+            <a href="#a" class="nav-link">API Shortcut Names</a>
+            <a href="#b" class="nav-link">Helper Functions</a>
+            <a href="#c" class="nav-link">Register a Command</a>
+            <a href="#d" class="nav-link">Parameter Type Helpers</a>
+            <a href="#e" class="nav-link">Item & Inventory Functions</a>
+            <a href="#f" class="nav-link">String & Formatting</a>
+            <a href="#g" class="nav-link">Player Interaction</a>
+            <a href="#h" class="nav-link">Validation</a>
+            <a href="#i" class="nav-link">Colour Utilities</a>
+            <a href="#j" class="nav-link">Debug Drawing</a>
+            <a href="#k" class="nav-link">Example Commands</a>
+        </div>
+    </nav>
+    
+    <main class="content">
+        <h1>Petal Documentation</h1>
+        <p>This page aims to help showcase the commands and features Petal has to offer, as well as explaining how you can help contribute and make your own additions.</p>
+        <p>If you want to share your commands/features or just want help or report a bug join the discord!</p>
+        <div class="discord-banner">
+        <img src="logo2.png" alt="💬" class="discord-icon">
+        <div class="discord-text">
+        <span>Join the community on</span>
+        <strong>Discord</strong>
+        </div>
+        <a href="https://discord.gg/CmJJKYNaRa" target="_blank" rel="noopener" class="discord-button">Join</a>
+        </div>
+        <h2 id="Petal-Commands">Petal Commands</h2>
+        <p></p>
+        <div class="note">
+            <div class="note-title">Note</div>
+            <p>The PetalAdmin commands are only for players with that tag. To make yourself a PetalAdmin run the command below.</p>
+            <pre><code>//add the tag
+/tag @s add PetalAdmin
+        
+//remove the tag
+/tag @s remove PetalAdmin</code></pre>
+        </div>
+        
+        <div id="Normal" class="expandable">
+            <div class="expand-header" onclick="toggleExpand(this)">
+                <span class="expand-title">Normal Commands</span>
+                <span class="expand-icon">▼</span>
+            </div>
+            <div class="expand-content">
+                <p>These commands don't require the admin tag at all.</p>
+                <hr class="section-break">
+                <pre><code>/simrange &lt;range&gt;</code></pre>
+                <p>This command will show the selected simulation range. You can do <code>/simrange clear</code> to clear it.</p>
+                <hr class="section-break">
+                <pre><code>/spawnrange &lt;range&gt;</code></pre>
+                <p>This command will show the selected spawn range. You can do <code>/spawnrange clear</code> to clear it.</p>
+                <hr class="section-break">
+                <pre><code>/hoppercheck &lt;action&gt; [X, Y, Z] [X, Y, Z]</code></pre>
+                <p>This command will tell you where any unlocked hoppers are in the selected range and give you a hopper lock percentage. <code>/hoppercheck clear</code> to clear it.</p>
+                <hr class="section-break">
+                <pre><code>/cartloadrange &lt;action&gt;</code></pre>
+                <p>This command is designed to work with Canopy and its UniversalChunkLoading rule.</p>
+                <hr class="section-break">
+                <pre><code>/petal</code></pre>
+                <p>This command shows all commands in a list similar to this one.</p>
+            </div>
+        </div>
+        
+        <div id="Admin" class="expandable">
+            <div class="expand-header" onclick="toggleExpand(this)">
+                <span class="expand-title">PetalAdmin Commands</span>
+                <span class="expand-icon">▼</span>
+            </div>
+            <div class="expand-content">
+                <p>These commands require the PetalAdmin tag.</p>
+                <hr class="section-break">
+                <div class="code-block"><div class="code-label">Dual command read below</div><pre><code>/SS &lt;value&gt;</code></pre></div>
+                <p>This command will give you the SS data to make the block/container you're looking at output the SS value you want.</p>
+                <hr class="section-break">
+                <div class="code-block"><div class="code-label">Dual command read below</div><pre><code>/filter &lt;action&gt; &lt;value&gt;</code></pre></div>
+                <p>This command will automatically set any hopper you open after running the command to be a filter. To disable filter mode run the same <code>/filter set &lt;value&gt;</code> and you will be set back to normal.</p>
+                <hr class="section-break">
+                <pre><code>/itemset &lt;name&gt;</code></pre>
+                <p>This command will spawn the itemset of choice at your location.</p>
+                    <ul>
+                        <li>tmc
+                            <p>This has mainly bulk boxes (boxes with a single item type) but has ~5 double chests of shulkers full of random items.</p></li>
+                        <li>casual
+                            <p>This has completely random items taken from HermitCraft season 9, Amelix, Prism, Advanced Automation and several players' personal worlds, all mixed and randomly picked.</p></li>
+                        <li>bulk
+                            <p>This has only boxes of the most common items found over all those worlds (23M items counted over all).</p></li>
+                        <li>split
+                            <p>This has boxes of a single item type at any fill level (the output of a splitter).</p></li>
+                        <li>nonstackable
+                            <p>This has boxes filled with nothing but random non-stackable items found over all worlds.</p></li>
+                    </ul>
+                <div class="warning">
+                <div class="warning-title">Warning</div>
+                <p>Due to the amount of NBT data loaded by the command you may notice a temporary drop in TPS.</p>
+                </div>
+                <hr class="section-break">
+                <pre><code>/infinidispenser &lt;action&gt;</code></pre>
+                <p>This command will make the item inside the dispenser infinite until reset or you leave the world.</p>
+                <hr class="section-break">
+                <pre><code>/packet &lt;mode&gt; &lt;code&gt;</code></pre>
+                <p>This will automatically encode a packet with the code you give it.</p>
+                <hr class="section-break">
+                <pre><code>/hss &lt;action&gt; &lt;hss type&gt; [speed]</code></pre>
+                <p>This command spawns a fake HSS at your location. The speed controls how fast they spawn, 1 being the default and 500 is the max.</p>
+                <hr class="section-break">
+                <pre><code>/utilityitems</code></pre>
+                <p>This command spawns a barrel below you with helpful items.</p>
+                <hr class="section-break">
+                <div class="code-block"><div class="code-scriptevent">Scriptevent compatible</div><pre><code>/itemsummon &lt;item&gt; &lt;amount&gt; &lt;X, Y, Z&gt;</code></pre></div>
+                <p>This command summons item entities at the given location and has a script event for command blocks <code>/scriptevent petal:itemsummon &lt;item&gt; &lt;amount&gt; &lt;X, Y, Z&gt;</code></p>
+                <hr class="section-break">
+                <div class="code-block"><div class="code-scriptevent">Scriptevent compatible</div><pre><code>/multisummon &lt;entity&gt; &lt;amount&gt; &lt;X, Y, Z&gt;</code></pre></div>
+                <p>This command summons 1 ~ 1000 (depending on the amount you select) entities at the given location and has a script event for command blocks <code>/scriptevent petal:multisummon &lt;entity&gt; &lt;amount&gt; &lt;X, Y, Z&gt;</code></p>
+            </div>
+        </div>
+        
+        <h3 id="cInfo">Commands Info</h3>
+        
+        <div class="note">
+            <div class="note-title">Note</div>
+            <p>Commands that are marked as dual have different effects depending on if you have the PetalAdmin tag or not.</p>
+            <code>/ss</code><p>This will set the block/container to the SS you choose. However, without the tag it will just tell you what to change.</p>
+            <code>/filter</code><p>This will set the hopper to the given SS filter. However, without the tag you need to run <code>/filter blocker &lt;value&gt;</code>. This will make the item in your hand into the blocker item.</p>
+        </div>
+        <div class="warning">
+            <div class="warning-title">Warning</div>
+            <p>All the commands that use the DebugDrawer have a bug where they show in all 3 dimensions regardless. As far as I know this is a Mojang problem and physically can't be fixed. However, if anyone has any ideas I'd be more than open to them.</p>
+        </div>
+        <hr class="section-break">
+        
+        <h2 id="corejs">Understanding how to use core.js</h2>
+        <p>This will cover most aspects to understanding core.js and includes a few examples.</p>
+        
+        <h3>Understanding The Import System</h3>
+        <p>The core.js file has a single import requirement <code class="language-js">import &#123;c&#125; from './core.js'</code> then you use the "sub-imports" to get what you want.</p>
+        
+<h4 id="a">API Shortcut Names</h4>
+<p>
+    <ul>
+        <li><span class="li-var">c.s</span> = system</li>
+        <li><span class="li-var">c.w</span> = world</li>
+        <li><span class="li-var">c.IS</span> = ItemStack</li>
+        <li><span class="li-var">c.CP</span> = CommandPermissionLevel</li>
+        <li><span class="li-var">c.CT</span> = CustomCommandParamType</li>
+        <li><span class="li-var">c.BCT</span> = BlockComponentTypes</li>
+        <li><span class="li-var">c.DD</span> = debugDrawer</li>
+        <li><span class="li-var">c.DL</span> = DebugLine</li>
+    </ul>
+</p>
+<hr class="section-break">
+<h4 id="b">Helper Functions</h4>
+<p>
+    <ul>
+        <li><span class="li-var">c.rC()</span> = Register Command</li>
+        <li><span class="li-var">c.rSE()</span> = Register Script Event (for tracking)</li>
+        <li><span class="li-var">c.MI()</span>, <span class="li-var">c.MS()</span>, <span class="li-var">c.ME()</span> = Send messages (Info, Success, Error)</li>
+        <li><span class="li-var">c.GV()</span> = Get block from View</li>
+        <li><span class="li-var">c.GI()</span> = Get Inventory from block</li>
+        <li><span class="li-var">c.SI()</span> = Set Item in inventory</li>
+        <li><span class="li-var">c.CI()</span> = Clear Inventory</li>
+        <li><span class="li-var">c.NS()</span> = Nice String (formats item names)</li>
+        <li><span class="li-var">c.QS()</span> = Quote Strip (removes quotes from strings)</li>
+    </ul>
+</p>
+<hr class="section-break">
+<h4 id="c">Register a Command</h4>
+<p>
+    <ul>
+        <li><span class="li-var">i</span> = CustomCommandRegistry instance</li>
+        <li><span class="li-var">n</span> = Command name
+            <p>(e.g., "petal:example")</p></li>
+        <li><span class="li-var">ds</span> = Description string</li>
+        <li><span class="li-var">p</span> = Permission level
+            <p>(e.g., `c.CP.Any`)</p></li>
+        <li><span class="li-var">m</span> = Mandatory parameters array</li>
+        <li><span class="li-var">op</span> = Optional parameters array</li>
+        <li><span class="li-var">cb</span> = Callback function `(o) => {}`</li>
+        <li><span class="li-var">tr</span> = Requires PetalAdmin tag (default: false)</li>
+        <li><span class="li-var">enums</span> = Object of enum definitions</li>
+        <li><span class="li-var">dM</span> = Dual mode flag (default: false)</li>
+    </ul>
+</p>
+<div class="scripte">
+    <div class="scripte-title">Scriptevents</div>
+    <p>Register a script event for help tracking <code class="language-js">rSE(n, ds, params)</code>
+        <ul>
+            <li><span class="li-var">n</span> = Command name
+                <p>(e.g., "petal:example")</p></li>
+            <li><span class="li-var">ds</span> = Description string</li>
+            <li><span class="li-var">params</span> = Parameter format string</li>
+        </ul>
+        <h4>Example:</h4>
+        <div class="real-code-block"><pre><code class="language-js">c.rSE("petal:example", "example description", "&lt;arg1&gt; &lt;arg2&gt;")</code></pre></div></p></div>
+
+<h4 id="d">Parameter Type Helpers</h4>
+<p>
+    <ul>
+        <li><span class="li-var">IT(n)</span> = Item Type Parameter
+            <p>Returns <code class="language-js">{type: CT.ItemType, name: n}</code></p></li>
+        <li><span class="li-var">I(n)</span> = Integer Parameter
+            <p>Returns <code class="language-js">{type: CT.Integer, name: n}</code></p></li>
+        <li><span class="li-var">L(n)</span> = Location Parameter
+            <p>Returns <code class="language-js">{type: CT.Location, name: n}</code></p></li>
+        <li><span class="li-var">Str(n)</span> = String Parameter
+            <p>Returns <code class="language-js">{type: CT.String, name: n}</code></p></li>
+        <li><span class="li-var">ET(n)</span> = Entity Type Parameter
+            <p>Returns <code class="language-js">{type: CT.EntityType, name: n}</code></p></li>
+        <li><span class="li-var">F(n)</span> = Float Parameter
+            <p>Returns <code class="language-js">{type: CT.Float, name: n}</code></p></li>
+        <li><span class="li-var">E(n)</span> = Enum Parameter
+            <p>Returns <code class="language-js">{type: CT.Enum, name: n}</code></p></li>
+    </ul>
+</p>
+<hr class="section-break">
+<h4 id="e">Item & Inventory Functions</h4>
+<p>Spawn item with no velocity <code class="language-js">sI(d, i, a, l)</code>
+<ul>
+    <li><span class="li-var">d</span> = Dimension</li>
+    <li><span class="li-var">i</span> = Item ID</li>
+    <li><span class="li-var">a</span> = Amount</li>
+    <li><span class="li-var">l</span> = Location</li>
+    <li>Returns: ItemEntity</li>
+</ul></p>
+<p>Get inventory container from block <code class="language-js">GI(b)</code></p>
+<ul>
+    <li><span class="li-var">b</span> = Block
+        <p>Returns: Container or null</p></li>
+</ul>
+<p>Get block inventory using BlockComponentTypes <code class="language-js">gBI(b)</code></p>
+<ul>
+    <li><span class="li-var">b</span> = Block
+        <p>Returns: Container or null</p></li>
+</ul>
+<p>Clear inventory <code class="language-js">CI(inv)</code></p>
+<ul>
+    <li><span class="li-var">inv</span> = Inventory container</li>
+</ul>
+<p>Set item in inventory slot <code class="language-js">SI(inv, i, id, n=1)</code></p>
+<ul>
+    <li><span class="li-var">inv</span> = Inventory container</li>
+    <li><span class="li-var">i</span> = Slot index</li>
+    <li><span class="li-var">id</span> = Item ID</li>
+    <li><span class="li-var">n</span> = Amount (default: 1)</li>
+</ul>
+<hr class="section-break">
+<h4 id="f">String & Formatting</h4>
+<p>Normalise string (remove "minecraft:", replace underscores, capitalise) <code class="language-js">NS(nm)</code></p>
+<ul>
+    <li><span class="li-var">nm</span> = String to normalise
+        <p>Returns: Formatted string</p>
+        <p>Example: `"minecraft:diamond_sword"` --> `"Diamond Sword"`</p></li>
+</ul>
+<p>Remove quotes from string if present <code class="language-js">QS(s)</code></p>
+<ul>
+    <li><span class="li-var">s</span> = String to process
+        <p>Returns: Unquoted string</p></li>
+</ul>
+<hr class="section-break">
+<h4 id="g">Player Interaction</h4>
+<p>Get block from player's view direction <code class="language-js">GV(p, d=6)</code></p>
+<ul>
+    <li><span class="li-var">p</span> = Player</li>
+    <li><span class="li-var">d</span> = Max distance (default: 6)
+        <p>Returns: Block or null</p></li>
+</ul>
+<p>Send info message (yellow)</p>
+<ul>
+    <li><span class="li-var">p</span> = Player</li>
+    <li><span class="li-var">m</span> = Message
+        <p>Format: "§5Petal§f §e{message}§r"</p></li>
+        <p>In Game: <div class="mc-chat" data-mc="§5Petal§f §eExample§r"></div></p>
+</ul>
+<p>Send success message (green)</p>
+<ul>
+    <li><span class="li-var">p</span> = Player</li>
+    <li><span class="li-var">m</span> = Message
+        <p>Format: "§5Petal§f §a{message}§r"</p></li>
+        <p>In Game: <div class="mc-chat" data-mc="§5Petal§f §aExample§r"></div></p>
+</ul>
+<p>Send error message (red)</p>
+<ul>
+    <li><span class="li-var">p</span> = Player</li>
+    <li><span class="li-var">m</span> = Message
+        <p>Format: "§5Petal§f §c{message}§r"</p></li>
+        <p>In Game: <div class="mc-chat" data-mc="§5Petal§f §cExample§r"></div></p>
+</ul>
+<hr class="section-break">
+<h4 id="h">Validation</h4>
+<p>Validate binary code (string of 0s and 1s) <code class="language-js">BV(cd)</code></p>
+<ul>
+    <li><span class="li-var">cd</span> = Code to validate
+        <p>Returns: Boolean</p></li>
+</ul>
+<hr class="section-break">
+<h4 id="i">Colour Utilities</h4>
+<p>Convert hex color to RGB object <code class="language-js">HxC(h)</code></p>
+<ul>
+    <li><span class="li-var">h</span> = Hex color (e.g., 0xFF00FF)
+    <p>Returns: {red, green, blue}</p></li>
+</ul>
+<hr class="section-break">
+<h4 id="j">Debug Drawing</h4>
+<p>Remove array of debug shapes <code class="language-js">rS(arr)</code></p>
+<ul>
+    <li><span class="li-var">arr</span> = Array of DebugLine shapes</li>
+</ul>
+<p>Draw chunk outline <code class="language-js">dCO(x, z, y, cl, ln, cs=16)</code></p>
+<ul>
+    <li><span class="li-var">x</span> = X coordinate</li>
+    <li><span class="li-var">y</span> = Y coordinate</li>
+    <li><span class="li-var">z</span> = Z coordinate</li>
+    <li><span class="li-var">cl</span> = Colour object</li>
+    <li><span class="li-var">ln</span> = Lines array</li>
+    <li><span class="li-var">cs</span> = Chunk size (default: 16)</li>
+</ul>
+<p>Draw box around block <code class="language-js">dBx(co, cl, ln, dr=0)</code></p>
+<ul>
+    <li><span class="li-var">co</span> = Block coordinates {x, y, z}</li>
+    <li><span class="li-var">cl</span> = Colour object</li>
+    <li><span class="li-var">ln</span> = Lines array</li>
+    <li><span class="li-var">dr</span> = Duration (default: 0 = permanent)</li>
+</ul>
+<p>Draw circle on axis <code class="language-js">dCr(cX, cY, cZ, r, ax, cl, sg, ln)</code></p>
+<ul>
+    <li><span class="li-var">cX</span>, <span class="li-var">cY</span>, <span class="li-var">cZ</span> = Center coordinates</li>
+    <li><span class="li-var">r</span> = Radius</li>
+    <li><span class="li-var">ax</span> = Axis ('x', 'y', or 'z')</li>
+    <li><span class="li-var">cl</span> = Colour object</li>
+    <li><span class="li-var">sg</span> = Segments (smoothness)</li>
+    <li><span class="li-var">ln</span> = Lines array</li>
+</ul>
+<p>Draw sphere (3 circles on all axes) <code class="language-js">dSp(cX, cY, cZ, r, cl, sg=48, ln)</code></p>
+<ul>
+    <li><span class="li-var">cX</span>, <span class="li-var">cY</span>, <span class="li-var">cZ</span> = Center coordinates</li>
+    <li><span class="li-var">r</span> = Radius</li>
+    <li><span class="li-var">cl</span> = Colour object</li>
+    <li><span class="li-var">sg</span> = Segments (default: 48)</li>
+    <li><span class="li-var">ln</span> = Lines array</li>
+</ul>
+<p>Clear debug drawing for player <code class="language-js">clD(m, pId)</code></p>
+<ul>
+    <li><span class="li-var">m</span> = Map containing player debug data</li>
+    <li><span class="li-var">pId</span> = Player ID
+        <p>Returns: Boolean (success/failure)</p></li>
+</ul>
+<h3 id="k">Example Commands</h3>
+<p>Below are some commands that show the basic steps to get a working command.</p>
+<h4>Normal command</h4>
+        <div class="real-code-block">
+        <pre><code class="language-js">import &#123;c&#125; from './core.js'
+
+c.s.beforeEvents.startup.subscribe(i =&gt; &#123;
+  c.rC(
+    i,
+    "petal:helloworld",
+    "Says Hi back to you",
+    c.CP.Any,
+    &#91;&#93;,
+    (o) =&gt; &#123;
+      const p = o.sourceEntity
+      if(!p) return
+      
+      c.MS(p, `Hi $&#123;p.name&#125;!`)
+    &#125;
+  )
+&#125;)
+</code></pre></div>
+<h4>Admin command</h4>
+        <div class="real-code-block">
+        <pre><code class="language-js">import &#123;c&#125; from './core.js'
+
+c.s.beforeEvents.startup.subscribe(i =&gt; &#123;
+  c.rC(
+    i,
+    "petal:admin",
+    "Admin command",
+    c.CP.Any,
+    &#91;&#93;,
+    (o) =&gt; &#123;
+      const p = o.sourceEntity
+      if(!p) return
+      c.MS(p, "You are an admin!")
+    &#125;,
+    true // Requires PetalAdmin tag
+  )
+&#125;)
+</code></pre></div>
+<h4>Drawing a debug box</h4>
+        <div class="real-code-block">
+        <pre><code class="language-js">const lines = &#91;&#93;
+const blockPos = &#123;x: 0, y: 64, z: 0&#125;
+const color = c.HxC(0xFF00FF) // Magenta
+
+c.dBx(blockPos, color, lines)
+
+// Later, to remove:
+c.rS(lines)
+</code></pre></div>
+  
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
